@@ -10,8 +10,8 @@ install_system_r() {
   fi
 
   "${apt[@]}" update
-  DEBIAN_FRONTEND=noninteractive "${apt[@]}" install -y \
-    r-base \
+  DEBIAN_FRONTEND=noninteractive "${apt[@]}" install -y --no-install-recommends \
+    r-base-core \
     r-base-dev \
     ca-certificates \
     curl \
@@ -21,7 +21,13 @@ install_system_r() {
     libcurl4-openssl-dev \
     liblapack-dev \
     libssl-dev \
-    libxml2-dev
+    libxml2-dev \
+    r-cran-data.table \
+    r-cran-ggplot2 \
+    r-cran-ggrepel \
+    r-cran-glmnet \
+    r-cran-matrix \
+    r-cran-remotes
 }
 
 if ! command -v Rscript >/dev/null 2>&1; then

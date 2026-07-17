@@ -1,0 +1,4 @@
+interface:
+  display_name: "世界杯 EloML 综合预测"
+  short_description: "严格 EloML、比分层与盘口变化的综合足球预测分析"
+  default_prompt: "使用 $worldcup-eloml-predictor 按最新赛果、盘口、大小球和阵容分析指定世界杯比赛。"

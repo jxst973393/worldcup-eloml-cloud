@@ -35,7 +35,10 @@ options(repos = c(CRAN = "https://cloud.r-project.org"))
 required <- c("remotes", "data.table", "ggplot2", "ggrepel", "glmnet", "Matrix")
 missing <- required[!vapply(required, requireNamespace, logical(1), quietly = TRUE)]
 if (length(missing) > 0) {
-  install.packages(missing, dependencies = TRUE)
+  install.packages(
+    missing,
+    dependencies = c("Depends", "Imports", "LinkingTo")
+  )
 }
 
 ref <- Sys.getenv("ELOML_REF")
@@ -54,4 +57,3 @@ RSCRIPT
 
 Rscript -e 'stopifnot(file.exists("data/international_results_latest.csv"))'
 echo "Codex Cloud environment is ready."
-

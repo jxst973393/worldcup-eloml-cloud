@@ -60,3 +60,30 @@ bash scripts/predict-match.sh \
 本项目仅用于模型学习与足球比赛理解，不涉及、不建议、也不参与任何体彩、
 竞猜、博彩或相关行为。
 
+## 独立的五大联赛版本
+
+世界杯版本完整保留在 `skills/worldcup-eloml-predictor/`，国际比赛数据仍在
+`data/international_results_latest.csv`。五大联赛使用另一套目录和数据，
+两者不会互相覆盖：
+
+- 联赛技能：`skills/european-league-eloml-predictor/`
+- 联赛入口：`scripts/predict-league-match.sh`
+- 联赛缓存：`data/leagues/`
+- 默认重点：英超和西甲；同时支持意甲、德甲、法甲
+
+联赛版保留 GitHub EloML 原生二元强弱概率，并增加独立的俱乐部主客场攻防、
+时间衰减、Dixon-Coles 低比分修正和赔率去水校准。示例：
+
+```bash
+bash scripts/predict-league-match.sh \
+  --league epl \
+  --home-team Arsenal \
+  --away-team Liverpool \
+  --match-date 2026-08-15 \
+  --seasons 2324,2425,2526 \
+  --refresh true
+```
+
+有当前赔率时还可以传入 `--home-odds`、`--draw-odds`、`--away-odds`、
+`--over-2.5-odds`、`--under-2.5-odds` 和 `--market-weight`。严格 EloML、
+比分层和市场校准始终分别展示。

@@ -1,7 +1,9 @@
-# World Cup EloML Cloud Agent Guide
+# Football EloML Cloud Agent Guide
 
-This repository is a reproducible football match analysis workspace for Codex
-Cloud. For any prediction, preview, live update, or post-match review:
+This repository contains two independent football analysis workflows for Codex
+Cloud. Never merge their datasets, scripts, model assumptions, or output rules.
+
+For World Cup or national-team analysis:
 
 1. Read `skills/worldcup-eloml-predictor/SKILL.md`.
 2. Read both files under `skills/worldcup-eloml-predictor/references/`.
@@ -22,3 +24,16 @@ The project pins `ModelOriented/EloML` to the commit recorded in
 `scripts/setup-cloud.sh`. Do not replace the native `calculate_epp()` and
 `calculate_probability()` workflow with a simplified Elo formula.
 
+For Premier League, La Liga, Serie A, Bundesliga, or Ligue 1 analysis:
+
+1. Read `skills/european-league-eloml-predictor/SKILL.md`.
+2. Read both files under `skills/european-league-eloml-predictor/references/`.
+3. Run `scripts/predict-league-match.sh` from the repository root.
+4. Keep native EloML, the time-weighted club score model, de-vigged market
+   probabilities, and the information layer clearly separated.
+5. Treat Premier League and La Liga as the priority leagues. Fit every league
+   independently and preserve explicit home/away effects.
+6. Use ordinary Markdown with no writing block, card, or bordered container.
+7. Include the learning-only disclaimer and never provide gambling actions.
+
+The World Cup workflow remains unchanged under `worldcup-eloml-predictor`.

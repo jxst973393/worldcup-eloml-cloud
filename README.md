@@ -11,6 +11,11 @@
 
 ## Codex Cloud 设置
 
+本仓库的两个 Skill 位于 Codex 可自动发现的 `.agents/skills/`：
+
+- `$worldcup-eloml-predictor`
+- `$european-league-eloml-predictor`
+
 在 Codex Cloud 为本仓库创建 Environment，并把 Setup script 设置为：
 
 ```bash
@@ -48,9 +53,17 @@ bash scripts/predict-match.sh \
 
 选择本仓库的 Cloud Environment 后，可以直接发送：
 
-> 读取仓库中的 AGENTS.md 和 worldcup-eloml-predictor 技能，使用最新公开
+> 使用 `$worldcup-eloml-predictor`，读取仓库中的 AGENTS.md，使用最新公开
 > 赛程和盘口数据，按照固定排版分析下一场世界杯比赛。必须运行严格 EloML
 > 脚本，并把 Poisson 比分层、盘口、让球、大小球、阵容和可能意外分开说明。
+
+五大联赛可以直接发送：
+
+> 使用 `$european-league-eloml-predictor`，联网确认比赛时间、最新赛果、
+> 伤停、首发和公开市场变化，运行联赛模型并分析指定比赛。严格 EloML、
+> 俱乐部比分层和市场校准必须分别展示。
+
+完整的云端、手机和本机用法见 [`docs/CLOUD-USAGE.md`](docs/CLOUD-USAGE.md)。
 
 ## 模型边界
 
@@ -62,11 +75,11 @@ bash scripts/predict-match.sh \
 
 ## 独立的五大联赛版本
 
-世界杯版本完整保留在 `skills/worldcup-eloml-predictor/`，国际比赛数据仍在
+世界杯版本完整保留在 `.agents/skills/worldcup-eloml-predictor/`，国际比赛数据仍在
 `data/international_results_latest.csv`。五大联赛使用另一套目录和数据，
 两者不会互相覆盖：
 
-- 联赛技能：`skills/european-league-eloml-predictor/`
+- 联赛技能：`.agents/skills/european-league-eloml-predictor/`
 - 联赛入口：`scripts/predict-league-match.sh`
 - 联赛缓存：`data/leagues/`
 - 默认重点：英超和西甲；同时支持意甲、德甲、法甲

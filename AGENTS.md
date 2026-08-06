@@ -40,4 +40,19 @@ For Premier League, La Liga, Serie A, Bundesliga, or Ligue 1 analysis:
 6. Use ordinary Markdown with no writing block, card, or bordered container.
 7. Include the learning-only disclaimer and never provide gambling actions.
 
+For UEFA Champions League, Europa League, or Conference League club matches,
+use the same `$european-league-eloml-predictor` skill but switch to its isolated
+European cup mode:
+
+1. Read `references/european-cup-mode.md` in addition to the normal skill files.
+2. Confirm the round, path, first/second leg, aggregate score, and advancement
+   rules from UEFA or another official competition source.
+3. Never run the same-league score baseline as if cross-league cup opponents
+   shared one scoring environment. If native EloML samples are not comparable,
+   state that the strict layer cannot provide an honest precise probability.
+4. Keep external club strength, market-derived Poisson scores, de-vigged odds,
+   and lineup information separately labelled.
+5. Append completed reviewed predictions to
+   `data/evaluations/european-cup-predictions.csv`; do not retune from one match.
+
 The World Cup workflow remains unchanged under `worldcup-eloml-predictor`.

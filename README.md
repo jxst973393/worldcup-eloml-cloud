@@ -16,6 +16,9 @@
 - `$worldcup-eloml-predictor`
 - `$european-league-eloml-predictor`
 
+其中 `$european-league-eloml-predictor` 同时包含隔离的欧战杯赛模式，支持
+欧冠、欧联和欧协联，但不会把杯赛结果混入五大联赛训练集。
+
 在 Codex Cloud 为本仓库创建 Environment，并把 Setup script 设置为：
 
 ```bash
@@ -63,6 +66,13 @@ bash scripts/predict-match.sh \
 > 伤停、首发和公开市场变化，运行联赛模型并分析指定比赛。严格 EloML、
 > 俱乐部比分层和市场校准必须分别展示。
 
+欧战杯赛可以继续使用同一个 Skill：
+
+> 使用 `$european-league-eloml-predictor` 的欧战杯赛模式，联网确认赛事轮次、
+> 首回合或次回合、总比分、最新正式赛、阵容、1X2、亚洲让球和大小球。
+> 不要直接套用五大联赛进球基线；严格层样本不可比时不要输出伪精确概率。
+> 分别展示强度参考、杯赛比分层、市场去水、三个核心比分和可能意外。
+
 完整的云端、手机和本机用法见 [`docs/CLOUD-USAGE.md`](docs/CLOUD-USAGE.md)。
 
 ## 模型边界
@@ -100,3 +110,7 @@ bash scripts/predict-league-match.sh \
 有当前赔率时还可以传入 `--home-odds`、`--draw-odds`、`--away-odds`、
 `--over-2.5-odds`、`--under-2.5-odds` 和 `--market-weight`。严格 EloML、
 比分层和市场校准始终分别展示。
+
+欧战杯赛规则位于
+`.agents/skills/european-league-eloml-predictor/references/european-cup-mode.md`，
+已复盘的杯赛预测保存在 `data/evaluations/european-cup-predictions.csv`。

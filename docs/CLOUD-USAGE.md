@@ -3,7 +3,7 @@
 本仓库已经按 Codex 的仓库级 Skill 规范配置。云端克隆仓库后会自动发现：
 
 - `$worldcup-eloml-predictor`：世界杯和国家队比赛。
-- `$european-league-eloml-predictor`：英超、西甲、意甲、德甲和法甲。
+- `$european-league-eloml-predictor`：英超、西甲、意甲、德甲、法甲，以及隔离口径的欧冠、欧联和欧协联。
 
 ## 第一次配置 Codex Cloud
 
@@ -50,6 +50,28 @@
 | 意甲 | `seriea` |
 | 德甲 | `bundesliga` |
 | 法甲 | `ligue1` |
+
+## 在云端分析欧战杯赛
+
+欧冠、欧联和欧协联继续调用同一个俱乐部 Skill，但要明确要求杯赛模式：
+
+```text
+使用 $european-league-eloml-predictor 的欧战杯赛模式。
+
+分析比赛：奥胡斯 vs 萨巴赫
+赛事：欧冠资格赛
+比赛日期：2026-08-11
+我的时区：Asia/Shanghai
+
+读取 references/european-cup-mode.md。联网确认轮次、首回合比分、总比分、
+开球时间、场地、最近正式赛、伤停、停赛、预计首发、1X2、亚洲让球和大小球。
+不要直接套用五大联赛进球基线；严格 EloML 样本不可比时明确写不输出
+伪精确概率。分别展示强度参考、杯赛比分层、市场去水、三个核心比分、
+可能意外、90 分钟方向和晋级方向。不提供下注建议。
+```
+
+已经完成的预测会追加到 `data/evaluations/european-cup-predictions.csv`。
+单场赛果只用于复盘；累计至少 50 场后才评估是否调整参数。
 
 ## 在云端分析世界杯或国家队
 
@@ -104,7 +126,7 @@ Codex 云端的仓库级 Skills 只在选择对应仓库时自动加载：
 
 | GitHub 仓库 | 自动可用内容 | 调用方式 |
 | --- | --- | --- |
-| `jxst973393/worldcup-eloml-cloud` | 世界杯和五大联赛两个 EloML Skill | `$worldcup-eloml-predictor`、`$european-league-eloml-predictor` |
+| `jxst973393/worldcup-eloml-cloud` | 世界杯、五大联赛及隔离欧战杯赛模式 | `$worldcup-eloml-predictor`、`$european-league-eloml-predictor` |
 | `jxst973393/seallon-workspace` | Seallon SEO、询盘、周报、搜索词聚类等 | 选择该仓库后用 `$seallon-yandex-seo-richtext` 等 |
 | `jxst973393/codex-global-skills` | 设计、SEO、文档、图表、发布和安全分析等通用 Skills | 选择该仓库后用 `$seo`、`$baoyu-design`、`$docs-generator` 等 |
 

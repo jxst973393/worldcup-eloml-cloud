@@ -1,4 +1,4 @@
 interface:
-  display_name: "五大联赛 EloML 综合预测"
-  short_description: "英超、西甲优先的俱乐部 EloML 与攻防比分分析"
-  default_prompt: "使用 $european-league-eloml-predictor 按最新赛果、主客场、阵容、赛程和盘口分析指定联赛比赛。"
+  display_name: "欧洲俱乐部 EloML 综合预测"
+  short_description: "五大联赛与隔离欧战杯赛的强度、比分和市场分析"
+  default_prompt: "使用 $european-league-eloml-predictor 按比赛类型切换联赛或欧战杯赛口径，并结合最新赛果、阵容、赛程和市场数据分析指定比赛。"

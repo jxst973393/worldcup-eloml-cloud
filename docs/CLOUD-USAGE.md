@@ -46,6 +46,12 @@ EloML和同联赛比分层不可用；在官方赛程双源确认、同一家机
 2.5大小球、第二市场来源交叉确认均满足后，运行
 scripts/predict-market-score.sh，并把结果标注为“市场独立Poisson回退”。
 缺少任一条件时停止，不生成比分。
+
+如果云端浏览接口返回 `401 Unauthorized`，不要立即写“当前数据不存在”。先在
+仓库根目录运行 `scripts/fetch-oddstorm-market.py` 和
+`scripts/fetch-betexplorer-market.py`。这两个脚本通过普通 HTTPS 读取两个独立
+公开来源，并输出机构、赔率、URL和UTC抓取时间。只有两个脚本也无法取得完整
+快照时，才按数据不足停止。
 ```
 
 联赛参数对应关系：

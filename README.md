@@ -127,6 +127,20 @@ bash scripts/predict-market-score.sh \
 该脚本只输出市场独立 Poisson 概率、预期进球和比分矩阵，不能称为
 严格 EloML 或俱乐部历史比分层。
 
+云端浏览接口若返回401，可从命令行运行双源市场助手：
+
+```bash
+python3 scripts/fetch-oddstorm-market.py \
+  --league-id 325 --league-slug england-premier-league \
+  --home Arsenal --away "Coventry City" --bookmaker Pinnacle
+
+python3 scripts/fetch-betexplorer-market.py \
+  --league-path football/england/premier-league \
+  --home Arsenal --away Coventry --bookmaker bet365
+```
+
+助手只读取公开页面，不需要账号、Cookie或API key。
+
 欧战杯赛规则位于
 `.agents/skills/european-league-eloml-predictor/references/european-cup-mode.md`，
 已复盘的杯赛预测保存在 `data/evaluations/european-cup-predictions.csv`。

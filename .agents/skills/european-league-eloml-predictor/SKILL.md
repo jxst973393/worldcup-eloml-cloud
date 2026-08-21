@@ -59,6 +59,21 @@ description: 使用 ModelOriented/EloML 原生强度流程和独立的俱乐部�
 
    升班马回退没有前两组原生结果，也没有可与市场加权的历史基线；只展示“不可用”的原生层和独立的市场回退层，不虚构综合权重。
 5. 联网核实至少两个公开来源的当前 1X2、亚洲让球、大小球和时间戳。赔率可用参数传入脚本进行去水校准；没有可靠数值时不要编造。
+   - 浏览或搜索接口返回 `401/403` 时，不等于公开数据不存在。若 Agent internet access 已开启，改用普通 HTTPS 命令行抓取。
+   - 英超可先运行以下两个独立来源助手，再把同一家机构的完整快照传给比分脚本：
+
+     ```bash
+     python3 scripts/fetch-oddstorm-market.py \
+       --league-id 325 --league-slug england-premier-league \
+       --home Arsenal --away "Coventry City" --bookmaker Pinnacle
+
+     python3 scripts/fetch-betexplorer-market.py \
+       --league-path football/england/premier-league \
+       --home Arsenal --away Coventry --bookmaker bet365
+     ```
+
+   - 两个助手都成功且方向一致时，满足市场双源核验；记录输出中的 URL、机构名与抓取时间。任一助手失败时继续寻找可靠来源，不得使用文档示范赔率替代当前快照。
+   - 2026/27 英超官方完整赛程可从 `https://www.premierleague.com/en/news/4675097/all-380-fixtures-for-202627-premier-league-season` 读取；再用对应俱乐部官方赛程新闻交叉确认。动态赛程页解析失败时，不要忽略已经成功读取的官方静态赛程。
 6. 核实伤停、停赛、预计首发、休息天数、连续客场、欧战和换帅信息。开赛前约一小时再检查官方首发。
 7. 按参考模板输出三个核心比分和可能意外路径。普通 Markdown 排版，不使用 writing block、HTML 卡片或外框。
 

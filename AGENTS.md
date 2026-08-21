@@ -51,6 +51,15 @@ Top scores as a market-only independent Poisson fallback, never as EloML or the
 historical club score model. Without that complete verification, stop without
 a confirmed score prediction.
 
+A 401 from an optional browsing/search interface does not by itself prove that
+public fixture or market data is unavailable. When agent internet access is
+enabled, retry verification through ordinary HTTPS from the shell. For current
+Premier League markets, prefer the deterministic helpers
+`scripts/fetch-oddstorm-market.py` and `scripts/fetch-betexplorer-market.py`;
+they expose named-bookmaker snapshots from two independent public pages. Cite
+their source URLs and retrieval timestamps. Do not reuse example odds from the
+documentation as if they were current.
+
 For UEFA Champions League, Europa League, or Conference League club matches,
 use the same `$european-league-eloml-predictor` skill but switch to its isolated
 European cup mode:

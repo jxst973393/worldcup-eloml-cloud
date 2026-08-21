@@ -7,9 +7,15 @@ args <- commandArgs(trailingOnly = TRUE)
 arg_value <- function(name, default = NULL) {
   key <- paste0("--", name)
   position <- match(key, args)
-  if (is.na(position)) return(default)
-  if (position == length(args)) stop(sprintf("Missing value after %s", key))
-  args[[position + 1]]
+  if (!is.na(position)) {
+    if (position == length(args)) stop(sprintf("Missing value after %s", key))
+    return(args[[position + 1]])
+  }
+  inline_prefix <- paste0(key, "=")
+  inline <- args[startsWith(args, inline_prefix)]
+  if (length(inline) > 1) stop(sprintf("Duplicate value for %s", key))
+  if (length(inline) == 1) return(sub(inline_prefix, "", inline, fixed = TRUE))
+  default
 }
 
 as_flag <- function(value) {

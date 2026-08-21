@@ -40,6 +40,17 @@ For Premier League, La Liga, Serie A, Bundesliga, or Ligue 1 analysis:
 6. Use ordinary Markdown with no writing block, card, or bordered container.
 7. Include the learning-only disclaimer and never provide gambling actions.
 
+For a promoted or returning club that is absent from the selected top-flight
+training seasons, do not treat the league script failure as permission to fake
+native results, but do not automatically discard verified market information
+either. Mark native EloML and the same-league club score layer unavailable. If
+the fixture is confirmed and a complete same-book 1X2 plus over/under snapshot
+has been cross-checked against a second current public source, run
+`scripts/predict-market-score.sh`. Label its probabilities, expected goals, and
+Top scores as a market-only independent Poisson fallback, never as EloML or the
+historical club score model. Without that complete verification, stop without
+a confirmed score prediction.
+
 For UEFA Champions League, Europa League, or Conference League club matches,
 use the same `$european-league-eloml-predictor` skill but switch to its isolated
 European cup mode:

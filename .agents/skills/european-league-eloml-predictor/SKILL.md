@@ -33,11 +33,31 @@ description: 使用 ModelOriented/EloML 原生强度流程和独立的俱乐部�
    bash scripts/predict-league-match.sh --league epl --home-team Arsenal --away-team Liverpool --match-date 2026-08-15 --seasons 2324,2425,2526 --refresh true
    ```
 
+   若目标队是升班马、重返顶级联赛球队或样本不足，导致脚本无法解析球队：
+
+   - 严格 EloML 与同联赛俱乐部比分层均标记为“不可用”，不得用名气、旧赛季或低级别原始数据补造；
+   - 不把脚本失败扩展为“所有市场分析都必须停止”；
+   - 先用赛事官网和俱乐部官网等两个来源确认赛程，再核实至少两个当前公开市场来源；
+   - 只有取得同一家来源完整的 1X2 与 2.5 大小球快照，并用第二来源交叉确认方向后，运行市场回退脚本：
+
+     ```bash
+     bash scripts/predict-market-score.sh \
+       --home-team Arsenal --away-team Coventry \
+       --home-odds 1.20 --draw-odds 7.50 --away-odds 16.00 \
+       --over-2.5-odds 1.60 --under-2.5-odds 2.42 \
+       --asian-line=-1.75 \
+       --snapshot-time "2026-08-21 17:43 Asia/Shanghai"
+     ```
+
+   该结果只能称为“市场校准比分层”或“市场独立 Poisson 回退”，不能称为严格 EloML、俱乐部历史比分层或综合模型。若缺少完整市场快照，继续停止，不生成比分。
+
 4. 记录四组结果，不得混称：
    - 严格 EloML 二元强弱概率；
    - 主客场攻防比分层的 90 分钟胜平负、预期进球和 Top 比分；
    - 公开赔率去水后的市场概率；
    - 设定权重后的综合校准概率。
+
+   升班马回退没有前两组原生结果，也没有可与市场加权的历史基线；只展示“不可用”的原生层和独立的市场回退层，不虚构综合权重。
 5. 联网核实至少两个公开来源的当前 1X2、亚洲让球、大小球和时间戳。赔率可用参数传入脚本进行去水校准；没有可靠数值时不要编造。
 6. 核实伤停、停赛、预计首发、休息天数、连续客场、欧战和换帅信息。开赛前约一小时再检查官方首发。
 7. 按参考模板输出三个核心比分和可能意外路径。普通 Markdown 排版，不使用 writing block、HTML 卡片或外框。

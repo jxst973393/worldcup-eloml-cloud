@@ -111,6 +111,22 @@ bash scripts/predict-league-match.sh \
 `--over-2.5-odds`、`--under-2.5-odds` 和 `--market-weight`。严格 EloML、
 比分层和市场校准始终分别展示。
 
+升班马不在近三季顶级联赛样本、联赛脚本无法解析时，不补造严格结果。
+在官方赛程和两个当前公开市场来源均已核验，且取得同一家机构完整的 1X2
+与 2.5 大小球快照后，可运行独立市场回退：
+
+```bash
+bash scripts/predict-market-score.sh \
+  --home-team Arsenal --away-team Coventry \
+  --home-odds 1.20 --draw-odds 7.50 --away-odds 16.00 \
+  --over-2.5-odds 1.60 --under-2.5-odds 2.42 \
+  --asian-line=-1.75 \
+  --snapshot-time "2026-08-21 17:43 Asia/Shanghai"
+```
+
+该脚本只输出市场独立 Poisson 概率、预期进球和比分矩阵，不能称为
+严格 EloML 或俱乐部历史比分层。
+
 欧战杯赛规则位于
 `.agents/skills/european-league-eloml-predictor/references/european-cup-mode.md`，
 已复盘的杯赛预测保存在 `data/evaluations/european-cup-predictions.csv`。

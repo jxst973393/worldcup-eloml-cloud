@@ -139,7 +139,7 @@ bash scripts/predict-league-match.sh \
 根目录运行：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File scripts/setup-windows.ps1
+powershell -ExecutionPolicy Bypass -File scripts/setup-and-verify-windows.ps1
 ```
 
 在Codex PC客户端中打开仓库根目录后，直接调用两个Skill。所有R模型、公开
@@ -150,7 +150,7 @@ PowerShell的`.ps1`入口；`.sh`入口仅用于macOS、Linux、WSL和云端。
 
 ```powershell
 git pull origin main
-powershell -ExecutionPolicy Bypass -File scripts/setup-windows.ps1
+powershell -ExecutionPolicy Bypass -File scripts/setup-and-verify-windows.ps1
 ```
 
 ## 刚上传的其他 Skills 怎么用

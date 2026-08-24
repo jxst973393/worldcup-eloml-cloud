@@ -63,7 +63,7 @@ winget install --id Python.Python.3.12 -e
 
 git clone https://github.com/jxst973393/worldcup-eloml-cloud.git
 cd worldcup-eloml-cloud
-powershell -ExecutionPolicy Bypass -File scripts/setup-windows.ps1
+powershell -ExecutionPolicy Bypass -File scripts/setup-and-verify-windows.ps1
 ```
 
 随后在Codex PC客户端中打开`worldcup-eloml-cloud`根目录。仓库内的
@@ -79,6 +79,9 @@ powershell -ExecutionPolicy Bypass -File scripts/predict-league-match.ps1 `
 ```
 
 更新项目只需在仓库目录运行`git pull origin main`。
+
+完整迁移说明见[`LOCAL-WINDOWS-HANDOFF.md`](LOCAL-WINDOWS-HANDOFF.md)。安装
+末尾必须出现`WINDOWS_LOCAL_VERIFICATION_OK`，才表示本机计算链路与参考包一致。
 
 ## 在手机上提问
 

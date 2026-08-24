@@ -32,22 +32,21 @@ function Get-RscriptPath {
     throw "Rscript.exe was not found. Install R first: winget install --id RProject.R -e"
 }
 
-function Invoke-LocalPython {
-    param(
-        [Parameter(Mandatory = $true)][string]$ScriptPath,
-        [string[]]$Arguments = @()
-    )
-
+function Get-PythonCommand {
     $py = Get-Command py.exe -ErrorAction SilentlyContinue
     if ($null -ne $py) {
-        & $py.Source -3 $ScriptPath @Arguments
-        return $LASTEXITCODE
+        return [PSCustomObject]@{
+            Path = $py.Source
+            Prefix = @("-3")
+        }
     }
 
     $python = Get-Command python.exe -ErrorAction SilentlyContinue
     if ($null -ne $python) {
-        & $python.Source $ScriptPath @Arguments
-        return $LASTEXITCODE
+        return [PSCustomObject]@{
+            Path = $python.Source
+            Prefix = @()
+        }
     }
 
     throw "Python 3 was not found. Install it first: winget install --id Python.Python.3.12 -e"

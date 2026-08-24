@@ -5,5 +5,8 @@ $repositoryRoot = Split-Path -Parent $scriptDirectory
 Set-Location $repositoryRoot
 
 $target = Join-Path $repositoryRoot "scripts\fetch-oddstorm-market.py"
-$exitCode = Invoke-LocalPython -ScriptPath $target -Arguments $args
-exit $exitCode
+$python = Get-PythonCommand
+$pythonExecutable = $python.Path
+$pythonArguments = @($python.Prefix) + @($target) + @($args)
+& $pythonExecutable @pythonArguments
+exit $LASTEXITCODE

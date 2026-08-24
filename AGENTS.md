@@ -40,6 +40,12 @@ For Premier League, La Liga, Serie A, Bundesliga, or Ligue 1 analysis:
 6. Use ordinary Markdown with no writing block, card, or bordered container.
 7. Include the learning-only disclaimer and never provide gambling actions.
 
+On native Windows, do not assume Bash or WSL. Use the PowerShell wrappers:
+`scripts/predict-league-match.ps1`, `scripts/predict-market-score.ps1`, and
+the two `fetch-*-market.ps1` helpers. Run `scripts/setup-windows.ps1` once if
+local dependencies are not ready. On macOS, Linux, WSL, and Codex Cloud,
+continue using the `.sh` entrypoints.
+
 For a promoted or returning club that is absent from the selected top-flight
 training seasons, do not treat the league script failure as permission to fake
 native results, but do not automatically discard verified market information

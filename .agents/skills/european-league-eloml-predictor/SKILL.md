@@ -24,6 +24,8 @@ description: 使用 ModelOriented/EloML 原生强度流程和独立的俱乐部�
 ## 工作流
 
 1. 确认联赛、主客队、开球时间和用户时区。“今天、现在、最新、临场、走地”必须联网核实。
+   - 原生 Windows 本地运行时使用 `scripts/*.ps1` PowerShell 入口；macOS、Linux、WSL 和云端使用 `scripts/*.sh`。
+   - Windows 首次使用若缺少依赖，先运行 `powershell -ExecutionPolicy Bypass -File scripts/setup-windows.ps1`。
 2. 判断是联赛还是欧战杯赛：
    - 联赛：继续执行本节第 3 步；
    - 欧战杯赛：读取 `references/european-cup-mode.md`，确认首回合、次回合或单场制，并使用杯赛隔离流程。
@@ -49,6 +51,16 @@ description: 使用 ModelOriented/EloML 原生强度流程和独立的俱乐部�
        --snapshot-time "2026-08-21 17:43 Asia/Shanghai"
      ```
 
+     Windows 对应入口为：
+
+     ```powershell
+     powershell -ExecutionPolicy Bypass -File scripts/predict-market-score.ps1 `
+       --home-team Arsenal --away-team Coventry `
+       --home-odds 1.20 --draw-odds 7.50 --away-odds 16.00 `
+       --over-2.5-odds 1.60 --under-2.5-odds 2.42 `
+       --asian-line=-1.75
+     ```
+
    该结果只能称为“市场校准比分层”或“市场独立 Poisson 回退”，不能称为严格 EloML、俱乐部历史比分层或综合模型。若缺少完整市场快照，继续停止，不生成比分。
 
 4. 记录四组结果，不得混称：
@@ -71,6 +83,8 @@ description: 使用 ModelOriented/EloML 原生强度流程和独立的俱乐部�
        --league-path football/england/premier-league \
        --home Arsenal --away Coventry --bookmaker bet365
      ```
+
+   - Windows 本地使用 `scripts/fetch-oddstorm-market.ps1` 和 `scripts/fetch-betexplorer-market.ps1`，参数与上面相同。
 
    - 两个助手都成功且方向一致时，满足市场双源核验；记录输出中的 URL、机构名与抓取时间。任一助手失败时继续寻找可靠来源，不得使用文档示范赔率替代当前快照。
    - 2026/27 英超官方完整赛程可从 `https://www.premierleague.com/en/news/4675097/all-380-fixtures-for-202627-premier-league-season` 读取；再用对应俱乐部官方赛程新闻交叉确认。动态赛程页解析失败时，不要忽略已经成功读取的官方静态赛程。

@@ -28,10 +28,10 @@ description: 使用 ModelOriented/EloML 原生流程、Poisson 比分扩展和�
    bash scripts/predict-match.sh --team-a England --team-b Argentina --match-date 2026-07-15 --neutral true --refresh true
    ```
 
-   Windows 技能随项目复制时执行：
+   Windows 在仓库根目录执行：
 
    ```powershell
-   Rscript .\skills\worldcup-eloml-predictor\scripts\predict_match.R --team-a England --team-b Argentina --match-date 2026-07-15 --neutral true --refresh true
+   powershell -ExecutionPolicy Bypass -File scripts/predict-match.ps1 --team-a England --team-b Argentina --match-date 2026-07-15 --neutral true --refresh true
    ```
 
    技能安装到 Windows Codex 全局目录时执行：
@@ -40,11 +40,10 @@ description: 使用 ModelOriented/EloML 原生流程、Poisson 比分扩展和�
    Rscript "$env:USERPROFILE\.codex\skills\worldcup-eloml-predictor\scripts\predict_match.R" --team-a England --team-b Argentina --match-date 2026-07-15 --neutral true --refresh true
    ```
 
-   macOS 若 `Rscript` 不在 PATH，可使用 `/opt/homebrew/bin/Rscript`。Windows 首次运行前安装 R、Rtools，并在 R 中执行：
+   macOS 若 `Rscript` 不在 PATH，可使用 `/opt/homebrew/bin/Rscript`。Windows 首次运行前安装 Git、R 和 Python 3，然后执行：
 
-   ```r
-   install.packages("remotes", repos = "https://cloud.r-project.org")
-   remotes::install_github("ModelOriented/EloML")
+   ```powershell
+   powershell -ExecutionPolicy Bypass -File scripts/setup-windows.ps1
    ```
 
 5. 记录脚本输出中的训练窗口、样本数、最新比分日期、严格二元概率、Poisson 胜平负、大小球概率和 Top 比分。

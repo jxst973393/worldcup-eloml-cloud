@@ -133,6 +133,26 @@ bash scripts/predict-league-match.sh \
   --refresh true
 ```
 
+### Windows PC 本地运行（不使用云端）
+
+先安装Git、R和Python 3，然后将完整仓库克隆或复制到Windows电脑。在仓库
+根目录运行：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/setup-windows.ps1
+```
+
+在Codex PC客户端中打开仓库根目录后，直接调用两个Skill。所有R模型、公开
+市场助手和数据缓存都在本机执行，不需要创建Cloud Environment。Codex应使用
+PowerShell的`.ps1`入口；`.sh`入口仅用于macOS、Linux、WSL和云端。
+
+本地更新最新版：
+
+```powershell
+git pull origin main
+powershell -ExecutionPolicy Bypass -File scripts/setup-windows.ps1
+```
+
 ## 刚上传的其他 Skills 怎么用
 
 Codex 云端的仓库级 Skills 只在选择对应仓库时自动加载：
@@ -143,7 +163,7 @@ Codex 云端的仓库级 Skills 只在选择对应仓库时自动加载：
 | `jxst973393/seallon-workspace` | Seallon SEO、询盘、周报、搜索词聚类等 | 选择该仓库后用 `$seallon-yandex-seo-richtext` 等 |
 | `jxst973393/codex-global-skills` | 设计、SEO、文档、图表、发布和安全分析等通用 Skills | 选择该仓库后用 `$seo`、`$baoyu-design`、`$docs-generator` 等 |
 
-本机或家里 PC 可以克隆后运行各仓库的安装脚本，把 Skills 安装到 `~/.agents/skills`。云端不读取家里电脑的 `~/.agents/skills`；它只读取云端容器中的用户 Skill 和所选仓库的 `.agents/skills`。
+本机或家里 PC 只需克隆仓库、运行对应的本地安装脚本并在 Codex 中打开仓库根目录；仓库级 `.agents/skills` 会自动生效，不必复制到全局目录。云端不读取家里电脑的全局 Skills；它只读取云端容器中的用户 Skill 和所选仓库的 `.agents/skills`。
 
 ## 常见问题
 

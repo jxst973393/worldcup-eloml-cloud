@@ -52,6 +52,34 @@ bash scripts/predict-match.sh \
 模型会输出训练窗口、样本数、严格 EloML 二元概率、Poisson 90 分钟
 胜平负、预期进球、大小球概率、双方进球概率和比分排名。
 
+## Windows 本地运行（不使用云端）
+
+在Windows安装Git、R和Python 3，将完整仓库克隆或复制到本机。推荐使用Git：
+
+```powershell
+winget install --id Git.Git -e
+winget install --id RProject.R -e
+winget install --id Python.Python.3.12 -e
+
+git clone https://github.com/jxst973393/worldcup-eloml-cloud.git
+cd worldcup-eloml-cloud
+powershell -ExecutionPolicy Bypass -File scripts/setup-windows.ps1
+```
+
+随后在Codex PC客户端中打开`worldcup-eloml-cloud`根目录。仓库内的
+`AGENTS.md`和`.agents/skills/`会提供完整工作流；模型与联网助手均在本机
+运行，不需要Cloud Environment。
+
+Windows直接运行联赛模型的入口为：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/predict-league-match.ps1 `
+  --league epl --home-team Arsenal --away-team Liverpool `
+  --match-date 2026-08-15 --seasons 2324,2425,2526 --refresh true
+```
+
+更新项目只需在仓库目录运行`git pull origin main`。
+
 ## 在手机上提问
 
 选择本仓库的 Cloud Environment 后，可以直接发送：
